@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Bucks Trivia</title>
-  <link rel="apple-touch-icon" href="icon.png">
 <style>
 @font-face {
   font-family: 'Bootzy TM';
@@ -24,31 +23,16 @@ body {
   background: var(--bg); color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
-  height: 100vh; width: 100vw; overflow: hidden;
 }
 
-.rotate-msg {
-  display: none; position: fixed; inset: 0;
-  background: var(--bg); z-index: 9999;
-  flex-direction: column; align-items: center; justify-content: center;
-  gap: 14px; text-align: center; padding: 40px;
-}
-.rotate-msg .r-icon { font-size: 2.4rem; }
-.rotate-msg p { font-size: 0.95rem; color: var(--ink2); }
-@media (orientation: portrait) {
-  .rotate-msg { display: flex; }
-  #app { display: none !important; }
-}
-
-#app { height: 100vh; width: 100vw; }
-
-.screen { display: none; height: 100vh; width: 100vw; }
-.screen.active { display: flex; }
+/* Portrait screens — normal vertical flow */
+.p-screen { display: none; min-height: 100vh; flex-direction: column; }
+.p-screen.active { display: flex; }
 
 .btn {
   display: block; width: 100%; border: none;
-  border-radius: var(--r-sm); padding: 13px 20px;
-  font-size: 0.92rem; font-weight: 700; cursor: pointer;
+  border-radius: var(--r-sm); padding: 15px 20px;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
   text-align: center; font-family: inherit; line-height: 1;
   -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   transition: opacity 0.1s;
@@ -58,203 +42,199 @@ body {
 .btn-ink     { background: var(--ink); color: var(--bg); }
 .btn-outline { background: transparent; border: 1.5px solid var(--card2); color: var(--ink2); }
 
-/* WELCOME */
-#welcome { flex-direction: row; }
+/* ── WELCOME (portrait) ── */
+#welcome { padding: 52px 24px 40px; }
 
-.w-left {
-  width: 38%; flex-shrink: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 32px 28px; border-right: 1px solid var(--card2); gap: 14px;
-}
-.w-title {
-  font-family: 'Bootzy TM', serif;
-  font-size: 4rem; color: var(--ink);
-  text-align: center; line-height: 1.05; letter-spacing: 1px;
-}
-.w-subtitle { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--ink3); }
-.w-divider { width: 40px; height: 1px; background: var(--card2); }
+.w-hero { text-align: center; margin-bottom: 36px; }
+.w-eyebrow { font-size: 0.65rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
+.w-title { font-family: 'Bootzy TM', serif; font-size: 4rem; color: var(--ink); line-height: 1; }
+.w-divider { width: 40px; height: 1px; background: var(--card2); margin: 16px auto; }
 
-.w-right {
-  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
-  padding: 24px 28px; display: flex; flex-direction: column;
-}
-.rule-block { margin-bottom: 16px; }
-.rule-block h3 { font-size: 0.6rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 9px; }
-.rule-row { display: flex; gap: 10px; margin-bottom: 7px; align-items: flex-start; }
+.rule-block { margin-bottom: 20px; }
+.rule-block h3 { font-size: 0.62rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
+.rule-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
 .rule-row:last-child { margin-bottom: 0; }
-.rule-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink2); flex-shrink: 0; margin-top: 8px; }
-.rule-row p { font-size: 0.8rem; line-height: 1.55; color: var(--ink2); }
+.rule-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink2); flex-shrink: 0; margin-top: 8px; }
+.rule-row p { font-size: 0.88rem; line-height: 1.6; color: var(--ink2); }
 .rule-row strong { color: var(--ink); font-weight: 700; }
-.w-cta { margin-top: auto; padding-top: 16px; }
+.w-cta { margin-top: 28px; }
 
-/* SETUP */
-#setup { align-items: center; justify-content: center; }
-.setup-box { width: 100%; max-width: 520px; padding: 0 40px; }
-.setup-title { font-family: 'Bootzy TM', serif; font-size: 2.4rem; color: var(--ink); margin-bottom: 4px; }
-.setup-sub { font-size: 0.85rem; color: var(--ink3); margin-bottom: 24px; }
+/* ── SETUP (portrait) ── */
+#setup { padding: 52px 24px 40px; }
 .back-btn {
   background: none; border: none; color: var(--ink3);
-  font-size: 0.82rem; cursor: pointer; padding: 0;
-  margin-bottom: 20px; font-family: inherit;
+  font-size: 0.88rem; cursor: pointer; padding: 0;
+  margin-bottom: 24px; font-family: inherit;
   touch-action: manipulation; -webkit-tap-highlight-color: transparent; display: block;
 }
-.input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.setup-title { font-family: 'Bootzy TM', serif; font-size: 2.8rem; color: var(--ink); margin-bottom: 4px; }
+.setup-sub { font-size: 0.88rem; color: var(--ink3); margin-bottom: 28px; }
+
+.input-row { display: flex; gap: 10px; margin-bottom: 14px; }
 .input-row input {
   flex: 1; background: var(--card); border: 1.5px solid var(--card2);
-  border-radius: var(--r-sm); padding: 12px 14px; color: var(--ink);
-  font-size: 0.92rem; outline: none; font-family: inherit;
+  border-radius: var(--r-sm); padding: 14px 16px; color: var(--ink);
+  font-size: 1rem; outline: none; font-family: inherit;
 }
 .input-row input:focus { border-color: var(--ink); }
 .input-row input::placeholder { color: var(--ink3); }
-.input-row .btn { width: auto; padding: 12px 18px; }
-.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 24px; min-height: 36px; }
-.chip { background: var(--ink); color: var(--bg); border-radius: 20px; padding: 7px 12px; font-size: 0.82rem; display: flex; align-items: center; gap: 7px; }
-.chip-x { cursor: pointer; opacity: 0.55; touch-action: manipulation; padding: 2px; }
+.input-row .btn { width: auto; padding: 14px 20px; }
 
-/* KICKOFF SCREEN */
-#kickoff { align-items: center; justify-content: center; flex-direction: column; gap: 0; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-#kickoff:active { opacity: 0.85; }
-.kickoff-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--ink3); margin-bottom: 20px; }
-.kickoff-name { font-family: 'Bootzy TM', serif; font-size: 5rem; color: var(--ink); line-height: 1; margin-bottom: 12px; text-align: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; min-height: 44px; }
+.chip { background: var(--ink); color: var(--bg); border-radius: 20px; padding: 9px 14px; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
+.chip-x { cursor: pointer; opacity: 0.5; touch-action: manipulation; padding: 3px; }
+
+/* ── KICKOFF (portrait, full screen centered) ── */
+#kickoff {
+  align-items: center; justify-content: center; text-align: center;
+  cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  padding: 40px 24px;
+}
+#kickoff:active { opacity: 0.8; }
+.kickoff-label { font-size: 0.65rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--ink3); margin-bottom: 16px; }
+.kickoff-name { font-family: 'Bootzy TM', serif; font-size: 5rem; color: var(--ink); line-height: 1; margin-bottom: 10px; }
 .kickoff-sub { font-size: 1rem; font-weight: 600; color: var(--ink2); margin-bottom: 40px; }
-.kickoff-hint { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); }
+.kickoff-hint { font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); }
 
-/* GAME */
-#game { position: relative; flex-direction: row; }
+/* ── GAME — CSS-rotated landscape while phone stays portrait ── */
+#game {
+  display: none;
+  position: fixed;
+  /* Swap dimensions: width=screen height, height=screen width */
+  width: 100vh;
+  height: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  transform-origin: center center;
+  background: var(--bg);
+  flex-direction: row;
+  overflow: hidden;
+}
+#game.active { display: flex; }
 
+/* Thin reader strip on left */
 .g-strip {
   width: 44px; flex-shrink: 0;
   background: var(--card); border-right: 1px solid var(--card2);
-  display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 16px 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: space-between; padding: 14px 0;
 }
-.g-strip-reader { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); white-space: nowrap; }
-.g-strip-num { font-size: 0.6rem; font-weight: 700; color: var(--ink3); text-align: center; }
+.g-strip-reader {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ink3); white-space: nowrap;
+}
+.g-strip-num { font-size: 0.58rem; font-weight: 700; color: var(--ink3); text-align: center; }
 
+/* Tappable main area */
 .g-main {
   flex: 1; display: flex; flex-direction: column;
   cursor: pointer; touch-action: manipulation;
   -webkit-tap-highlight-color: transparent; user-select: none; overflow: hidden;
+  position: relative;
 }
 .g-main:active { opacity: 0.9; }
 
-/* Question and answer share the same centered area */
+/* Centered content area */
 .g-center {
   flex: 1; display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  padding: 28px 52px; text-align: center;
+  padding: 24px 48px; text-align: center;
 }
 
 .g-placeholder { font-size: 0.9rem; color: var(--ink3); font-style: italic; }
+.g-cat { display: none; }
+.g-q-text { font-size: 1.7rem; font-weight: 600; line-height: 1.5; color: var(--ink); max-width: 580px; }
+.g-tap-hint { margin-top: 18px; font-size: 0.6rem; color: var(--ink3); letter-spacing: 2px; text-transform: uppercase; }
 
-.g-cat { font-size: 0.58rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 14px; }
-.g-q-text { font-size: 1.45rem; font-weight: 600; line-height: 1.5; color: var(--ink); max-width: 580px; }
-.g-tap-hint { margin-top: 20px; font-size: 0.62rem; color: var(--ink3); letter-spacing: 2px; text-transform: uppercase; }
-
-.g-a-lbl { font-size: 0.58rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 12px; }
-.g-a-txt { font-size: 1.55rem; font-weight: 600; color: var(--ink); line-height: 1.45; max-width: 580px; }
-.g-bonus { display: none; margin-top: 16px; padding: 12px 18px; background: var(--card); border-radius: var(--r-sm); text-align: left; max-width: 560px; width: 100%; }
+.g-a-lbl { font-size: 0.56rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 12px; }
+.g-a-txt { font-size: 1.8rem; font-weight: 600; color: var(--ink); line-height: 1.4; max-width: 580px; }
+.g-bonus { display: none; margin-top: 20px; text-align: center; max-width: 580px; width: 100%; }
 .g-bonus.show { display: block; }
-.g-bonus-lbl { font-size: 0.56rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 5px; }
-.g-bonus-txt { font-size: 0.84rem; color: var(--ink2); line-height: 1.5; }
+.g-bonus-lbl { font-size: 0.54rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
+.g-bonus-txt { font-size: 1.3rem; font-weight: 600; color: var(--ink); line-height: 1.5; margin-bottom: 10px; }
+.g-bonus-ans { font-size: 1.1rem; font-weight: 700; color: var(--ink); border-top: 1px solid var(--card2); padding-top: 10px; margin-top: 4px; }
 
-.g-next { display: none; position: absolute; bottom: 18px; right: 18px; }
-.g-next.show { display: block; }
-.g-next-btn {
-  background: var(--ink); color: var(--bg);
-  border: none; border-radius: var(--r-sm);
-  padding: 10px 22px; font-size: 0.85rem; font-weight: 700;
-  cursor: pointer; font-family: inherit;
-  touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: opacity 0.1s;
-}
-.g-next-btn:active { opacity: 0.65; }
+/* Next button bottom-right */
+
 </style>
 </head>
 <body>
 
-<div class="rotate-msg">
-  <div class="r-icon">&#x21BA;</div>
-  <p>Rotate your phone to landscape to play</p>
-</div>
-
-<div id="app">
-
 <!-- WELCOME -->
-<div id="welcome" class="screen active">
-  <div class="w-left">
-    <div class="w-subtitle">Buck's Night</div>
-    <div class="w-divider"></div>
+<div id="welcome" class="p-screen active">
+  <div class="w-hero">
+    <div class="w-eyebrow">Buck's Night</div>
     <div class="w-title">bucks trivia</div>
     <div class="w-divider"></div>
   </div>
-  <div class="w-right">
-    <div class="rule-block">
-      <h3>Setup</h3>
-      <div class="rule-row"><div class="rule-dot"></div><p>Arrange <strong>16 shots</strong> in a square — <strong>10 Fireball</strong> and <strong>6 Apple Juice</strong>. Shuffle so nobody knows which is which.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p>Connor needs a <strong>premix or beer</strong> for the whole game.</p></div>
-    </div>
-    <div class="rule-block">
-      <h3>How to Play</h3>
-      <div class="rule-row"><div class="rule-dot"></div><p>This is a <strong>pass and play</strong> game. The reader draws a question, reads it aloud, then passes the phone to the <strong>left</strong> after each round. The reader <strong>cannot answer or steal</strong>.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p>Any player can call <strong>"MINE"</strong> at any point — even mid-sentence. Reader stops, player answers without hearing the rest.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p><strong>Correct</strong> — pick any player to take a shot. Connor sips.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p><strong>Incorrect</strong> — that player takes a shot. One other may call <strong>"STEAL"</strong>. Max one steal per question.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p>Nobody calls MINE after <strong>two reads</strong> — group votes to skip.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p><strong>Connor cannot be selected</strong> to take a shot.</p></div>
-    </div>
-    <div class="rule-block">
-      <h3>Bonus Questions</h3>
-      <div class="rule-row"><div class="rule-dot"></div><p>Only available to the player who answered correctly.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p><strong>Nail it</strong> — give out an extra shot. Connor takes a shot.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p><strong>Miss it</strong> — take both shots yourself.</p></div>
-    </div>
-    <div class="rule-block">
-      <h3>Connor's Drinks</h3>
-      <div class="rule-row"><div class="rule-dot"></div><p>Connor <strong>sips</strong> every correct first-attempt answer.</p></div>
-      <div class="rule-row"><div class="rule-dot"></div><p>Connor <strong>takes a shot</strong> every correct bonus answer.</p></div>
-    </div>
-    <div class="w-cta">
-      <button class="btn btn-ink" id="btn-to-setup">Set Up Players</button>
-    </div>
+  <div class="rule-block">
+    <h3>Setup</h3>
+    <div class="rule-row"><div class="rule-dot"></div><p>Arrange <strong>16 shots</strong> in a square — <strong>10 Fireball</strong> and <strong>6 Apple Juice</strong>. Shuffle so nobody knows which is which.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p>Connor needs a <strong>premix or beer</strong> for the whole game.</p></div>
+  </div>
+  <div class="rule-block">
+    <h3>How to Play</h3>
+    <div class="rule-row"><div class="rule-dot"></div><p>This is a <strong>pass and play</strong> game. The reader draws a question, reads it aloud, then passes the phone to the <strong>left</strong> after each round.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p>The reader <strong>cannot answer or steal</strong>.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p>Any player can call <strong>"MINE"</strong> at any point — even mid-sentence. Reader stops, player answers without hearing the rest.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p><strong>Correct</strong> — pick any player to take a shot. Connor sips.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p><strong>Incorrect</strong> — that player takes a shot. One other may call <strong>"STEAL"</strong>. Max one steal per question.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p>Nobody calls MINE after <strong>two reads</strong> — group votes to skip.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p><strong>Connor cannot be selected</strong> to take a shot.</p></div>
+  </div>
+  <div class="rule-block">
+    <h3>Bonus Questions</h3>
+    <div class="rule-row"><div class="rule-dot"></div><p>Only available to the player who answered correctly.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p><strong>Nail it</strong> — give out an extra shot. Connor takes a shot.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p><strong>Miss it</strong> — take both shots yourself.</p></div>
+  </div>
+  <div class="rule-block">
+    <h3>Connor's Drinks</h3>
+    <div class="rule-row"><div class="rule-dot"></div><p>Connor <strong>sips</strong> every correct first-attempt answer.</p></div>
+    <div class="rule-row"><div class="rule-dot"></div><p>Connor <strong>takes a shot</strong> every correct bonus answer.</p></div>
+  </div>
+  <div class="w-cta">
+    <button class="btn btn-ink" id="btn-to-setup">Set Up Players</button>
   </div>
 </div>
 
 <!-- SETUP -->
-<div id="setup" class="screen">
-  <div class="setup-box">
-    <button class="back-btn" id="btn-back-welcome">&#8592; Back</button>
-    <div class="setup-title">Who's Playing?</div>
-    <p class="setup-sub">Add everyone except Connor.</p>
-    <div class="input-row">
-      <input type="text" id="player-input" placeholder="Player name..." maxlength="20" />
-      <button class="btn btn-ink" id="btn-add-player">Add</button>
-    </div>
-    <div class="chips" id="chips"></div>
-    <button class="btn btn-ink" id="btn-start-game">Start Game</button>
+<div id="setup" class="p-screen">
+  <button class="back-btn" id="btn-back-welcome">&#8592; Back</button>
+  <div class="setup-title">Who's Playing?</div>
+  <p class="setup-sub">Add everyone except Connor.</p>
+  <div class="input-row">
+    <input type="text" id="player-input" placeholder="Player name..." maxlength="20" />
+    <button class="btn btn-ink" id="btn-add-player">Add</button>
   </div>
+  <div class="chips" id="chips"></div>
+  <button class="btn btn-ink" id="btn-start-game">Start Game</button>
 </div>
 
 <!-- KICKOFF -->
-<div id="kickoff" class="screen" id="kickoff">
+<div id="kickoff" class="p-screen">
   <div class="kickoff-label">Reading First</div>
-  <div class="kickoff-name" id="kickoff-name">James</div>
+  <div class="kickoff-name" id="kickoff-name">-</div>
   <div class="kickoff-sub">You're up first.</div>
-  <div class="kickoff-hint">Tap anywhere to begin</div>
+  <div class="kickoff-hint">Tap to begin</div>
 </div>
 
-<!-- GAME -->
-<div id="game" class="screen">
+<!-- GAME (CSS-rotated to landscape) -->
+<div id="game">
   <div class="g-strip">
     <div class="g-strip-reader" id="g-reader">-</div>
     <div class="g-strip-num" id="g-num">0/0</div>
   </div>
   <div class="g-main" id="g-main">
-    <div class="g-center" id="g-center">
+    <button class="g-undo" id="btn-undo">&#x21A9;</button>
+    <div class="g-center">
       <div id="g-placeholder" class="g-placeholder">Tap to draw a question</div>
       <div id="g-question" style="display:none">
         <div class="g-cat" id="g-cat"></div>
         <div class="g-q-text" id="g-q-text"></div>
-        <div class="g-tap-hint" id="g-tap-hint">tap to reveal</div>
+        <div class="g-tap-hint">tap to reveal</div>
       </div>
       <div id="g-answer" style="display:none">
         <div class="g-a-lbl">Answer</div>
@@ -262,20 +242,18 @@ body {
         <div class="g-bonus" id="g-bonus">
           <div class="g-bonus-lbl">Bonus</div>
           <div class="g-bonus-txt" id="g-bonus-txt"></div>
+          <div class="g-bonus-ans" id="g-bonus-ans"></div>
         </div>
+        <div class="g-tap-hint" style="margin-top:18px">tap to continue</div>
       </div>
     </div>
-  </div>
-  <div class="g-next" id="g-next">
-    <button class="g-next-btn" id="btn-next">Next &#x2192;</button>
-  </div>
-</div>
 
+  </div>
 </div>
 
 <script>
 var ALL_QUESTIONS = [
-  {q:"True or False: Connor has stayed in over 15 countries.",a:"TRUE.",cat:"g",bonus:{txt:"Bonus: guess the exact number. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"16"}},
+  {q:"True or False: Connor has stayed in over 15 countries.",a:"TRUE.",cat:"g",bonus:{txt:"Guess the exact number. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"16"}},
   {q:"True or False: Connor has broken a bone.",a:"FALSE.",cat:"g"},
   {q:"True or False: Connor can cook a proper meal from scratch.",a:"TRUE.",cat:"g"},
   {q:"True or False: Connor has cried at a wedding.",a:"FALSE.",cat:"g"},
@@ -284,13 +262,13 @@ var ALL_QUESTIONS = [
   {q:"True or False: Connor met Roda on a dating app.",a:"TRUE.",cat:"g"},
   {q:"True or False: Connor has ever had a long-distance relationship.",a:"FALSE.",cat:"g"},
   {q:"True or False: Connor has fallen asleep on a bus in a foreign country and ended up in a different town.",a:"TRUE.",cat:"g"},
-  {q:"True or False: Connor has cried at a movie before.",a:"TRUE.",cat:"g",bonus:{txt:"Bonus: name the movie or its year of release. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"Marley and Me (2008)."}},
-  {q:"Higher or Lower: Is Connor's age higher or lower than 28?",a:"Higher. He is 29.",cat:"g",bonus:{txt:"Bonus: guess his exact age. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"29"}},
-  {q:"Higher or Lower: Is Connor taller or shorter than 6 foot?",a:"Taller. He is 6 foot 1.",cat:"g"},
+  {q:"True or False: Connor has cried at a movie before.",a:"TRUE.",cat:"g",bonus:{txt:"Name the movie or its year of release. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"Marley and Me (2008)."}},
+  {q:"Higher or Lower: Is Connor's age higher or lower than 28?",a:"Higher. He is 29.",cat:"g",bonus:{txt:"Guess Connor's exact age. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"29"}},
+  {q:"Higher or Lower: Is Connor taller or shorter than 6 foot?",a:"Taller. He is 6 foot 2.",cat:"g"},
   {q:"Higher or Lower: Has Connor known Roda for more or less than 3 years?",a:"More than 3 years.",cat:"g"},
-  {q:"Higher or Lower: Has Connor had more or fewer than 5 girlfriends?",a:"Fewer. He has had 4.",cat:"g",bonus:{txt:"Bonus: guess the exact number. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"4"}},
-  {q:"Higher or Lower: Has Connor spent more or less than 7 years studying at university?",a:"Less. Five and a half years.",cat:"g",bonus:{txt:"Bonus: closest guess gives out a shot and Connor takes a shot. Ties: both give one out.",ans:"5.5"}},
-  {q:"Higher or Lower: Has Connor worked more or fewer than 3 jobs?",a:"More. He has had 8.",cat:"g",bonus:{txt:"Bonus: guess the exact number. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"8"}},
+  {q:"Higher or Lower: Has Connor had more or fewer than 5 girlfriends?",a:"Fewer. He has had 4.",cat:"g",bonus:{txt:"Guess the exact number. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"4"}},
+  {q:"Higher or Lower: Has Connor spent more or less than 7 years studying at university?",a:"Less. Five and a half years.",cat:"g",bonus:{txt:"Closest guess gives out a shot and Connor takes a shot. Ties: both give one out.",ans:"5.5"}},
+  {q:"Higher or Lower: Has Connor worked more or fewer than 3 jobs?",a:"More. He has had 8.",cat:"g",bonus:{txt:"Guess the exact number. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"8"}},
   {q:"What did Connor and Roda do on their first date?",a:"DIY Paint and Sip. (Painting accepted.)",cat:"g"},
   {q:"What was Connor's first instrument?",a:"Piano.",cat:"g"},
   {q:"What does Connor have a Masters of?",a:"Medical Biotechnology.",cat:"g"},
@@ -308,7 +286,7 @@ var ALL_QUESTIONS = [
   {q:"True or False: Connor has bailed on a date after seeing the person in real life.",a:"FALSE.",cat:"s"},
   {q:"True or False: Connor has dated someone his friends did not like.",a:"TRUE.",cat:"s"},
   {q:"True or False: Connor has had a situationship that lasted longer than 6 months.",a:"FALSE.",cat:"s"},
-  {q:"Higher or Lower: Is Connor's body count higher or lower than 50?",a:"Higher.",cat:"s",bonus:{txt:"Bonus: guess the first digit of Connor's body count. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"8"}},
+  {q:"Higher or Lower: Is Connor's body count higher or lower than 50?",a:"Higher.",cat:"s",bonus:{txt:"Guess the first digit of Connor's body count. Right: give out an extra shot and Connor takes a shot. Wrong: take both.",ans:"8"}},
   {q:"What is the most Connor has ever spent on a single night out?",a:"$300.",cat:"s"},
   {q:"What was the drunkest Connor has ever been?",a:"First time at Whiskey Live.",cat:"s"},
   {q:"Who is Connor's worst ex?",a:"Glo.",cat:"s"},
@@ -321,9 +299,16 @@ var ALL_QUESTIONS = [
 
 var players=[],readerIdx=0,deck=[],deckPos=0,cardState="empty",listenersAttached=false;
 
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(function(s){s.classList.remove("active");});
+function showPortrait(id){
+  document.querySelectorAll(".p-screen").forEach(function(s){s.classList.remove("active");});
+  document.getElementById("game").classList.remove("active");
   document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+
+function showGame(){
+  document.querySelectorAll(".p-screen").forEach(function(s){s.classList.remove("active");});
+  document.getElementById("game").classList.add("active");
 }
 
 function shuffle(arr){
@@ -337,9 +322,7 @@ function renderChips(){
   for(var i=0;i<players.length;i++){html+="<div class='chip'>"+players[i]+" <span class='chip-x' data-idx='"+i+"'>x</span></div>";}
   document.getElementById("chips").innerHTML=html;
   document.querySelectorAll(".chip-x").forEach(function(x){
-    x.addEventListener("click",function(){
-      players.splice(parseInt(this.getAttribute("data-idx")),1);renderChips();
-    });
+    x.addEventListener("click",function(){players.splice(parseInt(this.getAttribute("data-idx")),1);renderChips();});
   });
 }
 
@@ -362,7 +345,7 @@ function resetCard(){
   document.getElementById("g-question").style.display="none";
   document.getElementById("g-answer").style.display="none";
   document.getElementById("g-bonus").classList.remove("show");
-  document.getElementById("g-next").classList.remove("show");
+  document.getElementById("btn-undo").classList.remove("show");
 }
 
 function onTap(){
@@ -375,43 +358,49 @@ function onTap(){
     document.getElementById("g-cat").textContent=q.cat==="g"?"General":"Spicy";
     document.getElementById("g-q-text").textContent=q.q;
     document.getElementById("g-a-txt").textContent=q.a;
-    document.getElementById("g-tap-hint").style.display="block";
-    document.getElementById("g-next").classList.remove("show");
-    var bonus=document.getElementById("g-bonus");
-    if(q.bonus){document.getElementById("g-bonus-txt").textContent=q.bonus.txt;bonus.classList.add("show");}
+      var bonus=document.getElementById("g-bonus");
+    if(q.bonus){document.getElementById("g-bonus-txt").textContent=q.bonus.txt;document.getElementById("g-bonus-ans").textContent="Answer: "+q.bonus.ans;bonus.classList.add("show");}
     else{bonus.classList.remove("show");}
     document.getElementById("g-question").style.display="block";
+    document.getElementById("btn-undo").classList.add("show");
     cardState="question";
-
   } else if(cardState==="question"){
     document.getElementById("g-question").style.display="none";
     document.getElementById("g-answer").style.display="block";
-    document.getElementById("g-next").classList.add("show");
     cardState="answer";
+  } else if(cardState==="answer"){
+    readerIdx++;updateStrip();resetCard();
   }
 }
 
-function onNext(e){
-  e.stopPropagation();
-  readerIdx++;
-  updateStrip();
-  resetCard();
-}
 
 function initGame(){
   readerIdx=Math.floor(Math.random()*players.length);
-  deckPos=0;
-  deck=shuffle(ALL_QUESTIONS);
-  // Show kickoff screen
+  deckPos=0;deck=shuffle(ALL_QUESTIONS);
   document.getElementById("kickoff-name").textContent=players[readerIdx];
-  showScreen("kickoff");
+  showPortrait("kickoff");
 }
 
+
+function onUndo(e){
+  e.stopPropagation();
+  if(cardState==="answer"){
+    document.getElementById("g-answer").style.display="none";
+    document.getElementById("g-question").style.display="block";
+    cardState="question";
+  } else if(cardState==="question"){
+    document.getElementById("g-question").style.display="none";
+    document.getElementById("g-placeholder").style.display="block";
+    document.getElementById("btn-undo").classList.remove("show");
+    if(deckPos>0)deckPos--;
+    cardState="empty";
+  }
+}
 function attachListeners(){
   if(listenersAttached)return;
   listenersAttached=true;
-  document.getElementById("btn-to-setup").addEventListener("click",function(){showScreen("setup");});
-  document.getElementById("btn-back-welcome").addEventListener("click",function(){showScreen("welcome");});
+  document.getElementById("btn-to-setup").addEventListener("click",function(){showPortrait("setup");});
+  document.getElementById("btn-back-welcome").addEventListener("click",function(){showPortrait("welcome");});
   document.getElementById("btn-add-player").addEventListener("click",addPlayer);
   document.getElementById("player-input").addEventListener("keydown",function(e){if(e.key==="Enter")addPlayer();});
   document.getElementById("btn-start-game").addEventListener("click",function(){
@@ -419,12 +408,10 @@ function attachListeners(){
     initGame();
   });
   document.getElementById("kickoff").addEventListener("click",function(){
-    updateStrip();
-    resetCard();
-    showScreen("game");
+    updateStrip();resetCard();showGame();
   });
   document.getElementById("g-main").addEventListener("click",onTap);
-  document.getElementById("btn-next").addEventListener("click",onNext);
+  document.getElementById("btn-undo").addEventListener("click",onUndo);
 }
 
 if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",attachListeners);}
